@@ -1,0 +1,29 @@
+{
+  "name": "battleships",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack serve --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ajehani/battleShips.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ajehani/battleShips/issues"
+  },
+  "homepage": "https://github.com/Ajehani/battleShips#readme",
+  "devDependencies": {
+    "css-loader": "^6.5.1",
+    "jest": "^27.4.7",
+    "style-loader": "^3.3.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.3"
+  }
+}
