@@ -1,9 +1,5 @@
-import { createBoard } from "./dom.js";
 import "./style.css";
-(function () {
-  createBoard();
-  // createBoard().populate(1);
-  // createBoard().populate(2);
+const gameObject = () => {
   const Gameboard = () => {
     const missed = [];
     const shipPos = {};
@@ -21,7 +17,7 @@ import "./style.css";
         missed.push();
       }
     };
-    return { place, receiveAttack };
+    return { place, receiveAttack,shipPos };
   };
   const Ship = (len) => {
     const position = [];
@@ -35,10 +31,12 @@ import "./style.css";
     return { isSunk, toHit };
   };
   const Player = () => {
-    let nu = 0;
-    const toggle = (num) => {
-      return 2 % num;
-    };
-    let state = toggle((nu += 1));
+    let n = 0;
+    const toggle = (num) =>  2 % num;
+    let state = toggle(n += 1);
   };
-})();
+  return {Player,Ship,Gameboard}
+}
+export {gameObject}
+  
+

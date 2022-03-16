@@ -12,8 +12,7 @@
     justify-content: space-around;
     cursor:crosshair;
 }
-#grid0 > div:hover{
-}
+
 #grid1{
     cursor:not-allowed;
 }
