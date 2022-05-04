@@ -30,12 +30,21 @@ const gameObject = () => {
     const isSunk = () => position.every((el) => !el);
     return { isSunk, toHit };
   };
-  const Player = () => {
-    let n = 0;
-    const toggle = (num) =>  2 % num;
-    let state = toggle(n += 1);
-  };
-  return {Player,Ship,Gameboard}
+  // const Player = () => {
+  //   let n = 0;
+  //   const toggle = (num) =>  2 % num;
+  //   let state = toggle(n += 1);
+  // };
+  const comp = () => {
+    let visited = [];
+    let attack = Math.floor(Math.random() * 100) + 1;
+    while(visited.includes(attack)){
+      attack = Math.floor(Math.random() * 100) + 1;
+    }
+    visited.push(attack);
+    document.querySelector(`#gird1 > blocks${attack}`);
+  }
+  return {Ship,Gameboard}
 }
 export {gameObject}
   

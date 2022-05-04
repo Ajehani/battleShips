@@ -1,12 +1,9 @@
 import "./style.css";
-import { gameObject } from "./index.js";
 const createBoard = () => {
-  // const game = gameObject();
   const board = document.querySelector("#board");
   const nav = document.querySelector("nav");
-  // const gameBoard = game.Gameboard();
-  // const player = game.Player();
   let shipCord = [];
+  let enemyCord = [];
   const navText = {
     5: "Place Your Battle Ship",
     4: "Place Your Submarine",
@@ -23,27 +20,43 @@ const createBoard = () => {
     } if(num === 1){
         for(let i = 0; i < shipCord.length; i++){
           for(let j = shipCord[i][0]; j <= shipCord[i][1]; j++){
-            console.log(j,document.querySelector(`#grid1 > #blocks${j}`));
-            // error-> document.querySelector(`#gird1 > #blocks${j}`).textContent = "1"
+            // console.log(j,document.querySelector(`#grid1 > #blocks${j}`));
+            // document.querySelector(`#gird1 > #blocks${j}`).textContent = "1"
           }
         }
     } else if(num === 2){
-      document.querySelectorAll(`#grid2 > div`).forEach((block) => block.addEventListener("click", () => block.style = "background-Color : aquamarine;"));
+        let trail = 6;
+        for(let i = 0; i < 3; i++){
+          let num = Math.floor(Math.random(101));
+          while(enemyCord.includes(num)){
+            num = Math.floor(Math.random(101));
+          }
+          for(let j = num; j <= num + trail ; j++){
+            console.log(document.querySelector(`.ex2#blocks${j}`));
+            //que es la problema?
+            enemyCord.push(document.querySelector(`#grid2 > #blocks${j}`));
+          }
+          trail -= 1;
+        }
+      document.querySelectorAll(`#grid2 > div`).forEach((block) => block.addEventListener("click", (e) => {
+          console.log(enemyCord);
+        if(enemyCord.includes(e.target)){
+            block.style = "background-Color : red;";
+            enemyCord.splice(enemyCord.indexOf(e.target),1)
+            //remove from enemy coordinates
+        } else{  
+            block.style = "background-Color : aquamarine;";
+        }
+        // ai
+      }))
     }
   };
   const select = (mode,chunkCount) => {
     let count = 0;
     const doIt = (b) => {
-      // if(count > 3){
-      //   document.querySelectorAll(`#grid${0} > div`).forEach((block) => block.removeEventListener(`${mode}`,work));
-      //   nav.textContent = "Selection Complete";
-      //   populate(1);
-      //   populate(2);
-      //   document.querySelector("#grid0").remove();
-      // }
       document.querySelector("#grid0").style = "cursor:crosshair;"
       let number = parseInt(String(b.id).match(/\d/g).join(""));        
-      if ( number % 10 <= (10 - parseInt(chunkCount) + 1) && number % 10 !== 0 ) {
+      if (number % 10 <= (10 - parseInt(chunkCount) + 1) && number % 10 !== 0 ) {
         count += 1;
         chunkCount -= 1;
         nav.textContent = navText[chunkCount];
@@ -55,26 +68,22 @@ const createBoard = () => {
           let chunkPart = document.querySelector(`#blocks${String(el)}`);
           chunkPart.style = "background-Color : teal";
         });
-        shipCord.push([number,number + chunkCount]);
-        // gameBoard.place(board.navText[count+1],board.shipCord[count-1][0],board.shipCord[count-1][1])
-        // board.shipCord[count-4]
-        console.log(shipCord);
+        shipCord.push([number,number+chunkCount]);
       } else {
-        document.querySelector(`#blocks${number}`).style = "cursor:not-allowed;";
+            document.querySelector(`#blocks${number}`).style = "cursor:not-allowed;";
       }
   }
-  // function work(el){
-  //   doIt(el.target);
-  // }
   const blocks = document.querySelectorAll(`#grid${0}>div`);
   blocks.forEach((block) => block.addEventListener(`${mode}`, function work(el){
-    doIt(el.target);
-    if(count > 3){
+    if(count == 3){
       document.querySelectorAll(`#grid${0} > div`).forEach((block) => block.removeEventListener(`${mode}`,work));
       nav.textContent = "Selection Complete";
       document.querySelector("#grid0").remove();
       populate(1);
       populate(2);
+    }
+    if(count < 3){
+        doIt(el.target);
     }
   }));
 };
@@ -82,11 +91,6 @@ const createBoard = () => {
     nav.textContent = "Place Your Carrier";
     populate(0);
     select("click",6);
-    // for(let i = 3; i >= 0; i--){
-    //   console.log(board.shipCord[i])
-    //   board.place(board.navText[i+2],board.shipCord[i][0],board.shipCord[i][1])
-    // }
-    // console.log(board.shipPos);
   })();
   return {shipCord,navText};
 };
