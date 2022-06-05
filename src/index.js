@@ -11,7 +11,7 @@ const gameObject = () => {
       return Ship(end - start);
     };
     const receiveAttack = (x, y) => {
-      if (shipPos.includes([x, y])) {
+      if(shipPos.includes([x, y])) {
         Ship().toHit();
       } else {
         missed.push();

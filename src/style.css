@@ -1,4 +1,7 @@
 /* board object styling: */
+html{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 .grid{
     display: grid;
     grid-template-columns: repeat(10,1fr);
@@ -31,12 +34,12 @@
 .blocks{
     border: 1px solid black;
 }
-.blocks:hover{
+/* .blocks:hover{
     background-color: rgba(162, 152, 152, 0.873);
-}
-.ex0:hover{
+} */
+/* .ex0:hover{
     background-color:blue;
-}
+} */
 .ex2:hover{
     background-color:rgb(0, 255, 72);
 }
@@ -45,7 +48,21 @@
 }  */
 nav{
     text-align: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 30px;
     margin: 2rem 0;
+}
+#overlay{
+    pointer-events: none;
+    position: absolute;
+    top:0px; 
+    bottom:0px; 
+    width: 100%
+}
+button{
+    position: absolute;
+    bottom : 3rem;
+    padding : 1rem;
+}
+.tagged{
+    background-color: rgb(180, 245, 245);
 }
